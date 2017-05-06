@@ -1,2 +1,2 @@
-#Laravel Tic-Tac-Toe
+# Laravel Tic-Tac-Toe
 By: Adrien Maranville
