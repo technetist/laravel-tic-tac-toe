@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -83,5 +85,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="//js.pusher.com/4.0/pusher.min.js"></script>
+    @yield('scripts')
 </body>
 </html>
