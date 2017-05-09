@@ -1,0 +1,28 @@
+.profile-picture img {
+    width: 50%;
+    margin: 0 auto;
+}
+.profile-info {
+    text-align: center;
+    margin-top: 25px;
+}
+.profile-info .username {
+    font-size: 30px;
+    font-weight: 600;
+}
+.profile-info .score {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.list-group {
+    margin-top: 10px;
+}
+.list-group-item .opponent-info {
+    position: relative;
+    top: 15px;
+}
+.list-group-item .img-responsive {
+    float: left;
+    margin-right: 20px;
+}
