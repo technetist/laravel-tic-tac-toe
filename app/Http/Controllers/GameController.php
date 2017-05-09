@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GameOver;
+use App\Events\Play;
+use App\Game;
 use App\Turn;
 use Illuminate\Http\Request;
 
@@ -11,7 +14,7 @@ class GameController extends Controller
         $user = $request->user();
         $players = Turn::where('game_id', '=', $id)->select('player_id', 'type')->distinct()->get();
         $playerType = $user->id == $players[0]->player_id ? $players[0]->type : $players[1]->type;
-        $otherPlayerId = $user->id == $players[0]->player_id ? $players[1]->type : $players[0]->type;
+        $otherPlayerId = $user->id == $players[0]->player_id ? $players[1]->player_id : $players[0]->player_id;
 
         $pastTurns = Turn::where('game_id', '=', $id)->whereNotNull('location')->orderBy('id')->get();
         $nextTurn = Turn::where('game_id', '=', $id)->whereNull('location')->orderBy('id')->first();
@@ -69,5 +72,29 @@ class GameController extends Controller
             $locations[$pastTurn->location]["type"]=$pastTurn->type;
         }
         return view('board', compact('user', 'id', 'nextTurn', 'locations', 'playerType', 'otherPlayerId'));
+    }
+
+    public function play(Request $request, $id){
+        $user = $request->user();
+        $location = $request->get('location');
+
+        $turn = Turn::where('game_id', '=', $id)->whereNull('location')->orderBy('id')->first();
+        $turn->location = $location;
+        $turn->save();
+
+        event(new Play($id, $turn->type, $location, $user->id));
+        return response()->json(["status" => "success", "data" => "Saved"]);
+    }
+
+    public function gameOver(Request $request, $id){
+        $user = $request->user();
+        $location = $request->get('location');
+
+        $turn = Turn::where('game_id', '=', $id)->whereNull('location')->orderBy('id')->first();
+        $turn->location = $location;
+        $turn->save();
+
+        event(new GameOver($id, $user->id, $request->get('result'), $location, $turn->type));
+        return response()->json(["status" => "success", "data" => "Saved"]);
     }
 }
