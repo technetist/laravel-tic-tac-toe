@@ -11,7 +11,6 @@
                     </div>
                     <div class="profile-info">
                         <div class="username">{{ $user->name }}</div>
-                        <div class="score">{{ $user->score }}</div>
                     </div>
                 </div>
             </div>
@@ -38,7 +37,6 @@
                                 <img src="https://www.gravatar.com/avatar/{{ md5( strtolower( trim( $opponent->email ) ) ) }}?d=retro" alt="user avatar" class="img-circle img-responsive">
                                 <span class="opponent-info">
                                     {{ $opponent->name }} <br>
-                                    <small>Score: {{ $opponent->score }}</small>
                                 </span>
                                 <form action="/new-game" method="post">
                                     {{ csrf_field() }}
