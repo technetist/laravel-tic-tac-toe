@@ -38,7 +38,7 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "php artisan migrate:refresh"
+            "php artisan migrate:rollback"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
